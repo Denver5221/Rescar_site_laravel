@@ -1,0 +1,42 @@
+.map__image{
+    width: 100%;
+}
+.map__image .paysterne path{
+    fill: #D4D9DD;
+    stroke: #fff;
+    stroke-width: 1px;
+    transition: fill 0.2s;
+}
+.map__image .paysterne path:hover{
+    fill: #939393db;
+    stroke: #ebebeb;
+    stroke-width: 1px;
+}
+
+.pays path{
+    fill: #D9A367;
+    stroke: #fff;
+    stroke-width: 1px;
+    transition: fill 0.3s ease;
+}
+.pays path:hover{
+    fill: #1D934D;
+    stroke: #1D934D;
+    stroke-width: 1px;
+    transition: fill 0.2s;
+}
+
+div #nomPays {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    pointer-events: none;
+    display: none;
+  }
+  
