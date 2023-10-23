@@ -14,6 +14,7 @@ use App\Models\EtudePublication;
 use App\Models\Fiche;
 use App\Models\Rapport;
 use App\Models\Supportformation;
+use App\Models\GroupeTravail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -333,6 +334,64 @@ class RessourcesController extends Controller
               $recenteComent = CommentaireArticle::latest()->where('id_lier',$data->id)->take(4)->get();
 
               return view('front.ressources.articles-single',  ['recenteComent'=>$recenteComent,'comments'=>$comments,'categories'=>$categories,'data'=>$data,'title' =>$data->	meta_title, 'description' =>$data->meta_description]);
+
+          }catch(\Exception $e){
+              DB::rollBack();
+              return redirect()->back()->withErrors(['error' => 'Veuillez réessayer plus tard ou contacter l\'assistance.'])->withInput();
+          }
+      }
+
+
+
+       ////////////// Froupe de travail
+      public function travail(Request $request, $id = null)
+    {
+        try {
+            $query = GroupeTravail::query();
+
+            if ($request->has('search')) {
+                $searchTerm = '%' . $request->search . '%';
+                $query->where(function ($q) use ($searchTerm) {
+                    $q->where('titre', 'like', $searchTerm)
+                        ->orWhere('description', 'like', $searchTerm);
+                });
+            }
+
+            if ($id) {
+                $query->whereHas('categories', function ($q) use ($id) {
+                    $q->where('categories.id', $id);
+                });
+            }
+
+            $query->where('status', 1)->latest();
+
+            $groupetravail = $query->select('titre', 'description', 'image', 'status', 'id', 'slug', 'created_at')->paginate(5);
+            $categories = Categorie::latest()->get();
+
+            $viewData = [
+                'categories' => $categories,
+                'groupetravail' => $groupetravail,
+                'title' => 'Supports | ReSCAR-AOC',
+                'description' => 'RESCAR-AOC : Acteur majeur du conseil agricole et rural en Afrique de l’Ouest et du Centre, renforçant les synergies pour un développement durable.'
+            ];
+
+            return view('front.ressources.travail', $viewData);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->withErrors(['error' => 'Veuillez réessayer plus tard ou contacter l\'assistance.'])->withInput();
+        }
+    }
+
+      public function travail_show($slug)
+      {
+          try{
+              $categories = Categorie::latest()->get();
+
+              $data = GroupeTravail::where('slug', $slug)->firstOrFail();
+
+
+
+              return view('front.ressources.travail-single',  ['categories'=>$categories,'data'=>$data,'title' => $data->meta_title, 'description' =>$data->meta_description]);
 
           }catch(\Exception $e){
               DB::rollBack();

@@ -126,6 +126,9 @@
                             <li class="{{ Request::routeIs('articles') ? 'active' : '' }}">
                                 <a href="{{getRouterValue();}}/ressources/articles">Articles de memoire et recherche</a>
                             </li>
+                            <li class="{{ Request::routeIs('articles') ? 'active' : '' }}">
+                                <a href="{{getRouterValue();}}/ressources/travail">Groupe de travail</a>
+                            </li>
                         </ul>
                     </li>
 

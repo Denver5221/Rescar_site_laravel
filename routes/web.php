@@ -159,6 +159,19 @@ Route::get('/deconnexion', function () {
             Route::post('/articles-mémoires-recherche/commentaire',[CommentaireController::class, 'article_commentaire'])->name('ressources.articles-mémoires-recherche.commentaire')->middleware(['auth', 'checkUserStatus']);
 
 
+              //////////////////////////////////////////////////// groupe de travail
+              Route::get('/groupe-travail',[RessourcesController::class, 'travail'])->name('ressources.groupe-travail');
+
+              Route::post('/groupe-travail',[RessourcesController::class, 'travail'])->name('ressources.groupe-travail.search');
+  
+              ///////////////////////////////////////// recherche_par_category/{id}
+              Route::get('/groupe-travail/recherche_par_category/{id}',[RessourcesController::class, 'travail'])->name('ressources.groupe-travail.recherche_par_category');
+  
+  
+              Route::get('/groupe-travail/{slug}',[RessourcesController::class, 'travail_show'])->name('ressources.groupe-travail');
+  
+  
+
         });
         Route::prefix('repertoires')->group(function(){
 
@@ -186,6 +199,6 @@ Route::get('/deconnexion', function () {
             Route::post('',[ForumController::class, 'store'])->name('front.forum.store')->middleware(['auth', 'checkUserStatus']);
         });
 
-        Route::fallback(function () {
-            return view('404');
-        });
+      //  Route::fallback(function () {
+          //  return view('404');
+       // });

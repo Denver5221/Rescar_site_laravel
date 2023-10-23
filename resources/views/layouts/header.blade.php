@@ -143,6 +143,8 @@
                 <li><a href="{{ url('ressources/rapport-activités') }}">Rapport d’activités</a></li>
                 <li><a href="{{ url('ressources/support-formation') }}">Support de formation</a></li>
                 <li><a href="{{ url('ressources/articles-mémoires-recherche') }}">Articles, Mémoires de recherche</a></li>
+                <li><a href="{{ url('ressources/groupe-travail') }}">Groupe de travail</a></li>
+
               </ul>
             </li>
             <li><a href="#">Repertoires</a>
@@ -281,6 +283,7 @@
                 <li><a href="{{ url('ressources/rapport-activités') }}">Rapport d’activités</a></li>
                 <li><a href="{{ url('ressources/support-formation') }}">Support de formation</a></li>
                 <li><a href="{{ url('ressources/articles-mémoires-recherche') }}">Articles, Mémoires de recherche</a></li>
+                <li><a href="{{ url('ressources/groupe-travail') }}">Groupe de travail</a></li>
               </ul>
             </li>
             <li><a href="#">Repertoires</a>

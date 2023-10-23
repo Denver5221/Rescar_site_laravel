@@ -64,6 +64,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Supportformation::class, 'id_user');
     }
+    public function grouptravail()
+    {
+        return $this->hasMany(GroupeTravail::class, 'id_user');
+    }
     public function rescamails()
     {
         return $this->hasMany(Rescamail::class, 'id_user');

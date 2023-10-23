@@ -21,8 +21,7 @@ use App\Http\Controllers\Backen\RecrutementPartenaireController;
 use App\Http\Controllers\Backen\SpamController;
 use App\Http\Controllers\Backen\SupportFormationController;
 use App\Http\Controllers\Backen\UserController;
-use App\Models\Actualite;
-use App\Models\Fiche;
+use App\Http\Controllers\Backen\GTravailController;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\RoleMiddleware;
@@ -386,10 +385,21 @@ $prefixRouters = [
 
             Route::delete('/supports/delete/{id}', [SupportFormationController::class, 'destroy'])->name('supports.delete');
 
+                ////////////////////////////// Groupe de travail
+            Route::get('/travail', [GTravailController::class, 'index'])->name('travail.index');
 
-            // Route::get('/supports/modifier', function(){
-            //     return view('pages.ressources.modifiersupports',  ['title' => ' Modifier - Support de formations - Ressources | RESCAR-AOC -Dashboard ', 'breadcrumb' => 'This Breadcrumb']);
-            // })->name('supports');
+            Route::get('/travail/ajouter', [GTravailController::class, 'create'])->name('travail.create');
+
+            Route::post('/travail/ajouter/store', [GTravailController::class, 'store'])->name('travail.store');
+
+            Route::get('/travail/modifier/{slug}', [GTravailController::class, 'edit'])->name('travail.edit');
+
+            Route::put('/travail/modifier/{id}', [GTravailController::class, 'update'])->name('travail.update');
+
+            Route::post('/travail/{support}/status', [GTravailController::class, 'updateStatus'])->name('travail.updateStatus');
+
+            Route::delete('/travail/delete/{id}', [GTravailController::class, 'destroy'])->name('travail.delete');
+
 
 
             //Route Articles, Mémoires de recherche
